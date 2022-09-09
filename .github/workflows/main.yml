@@ -1,0 +1,20 @@
+name: Publish Website to Web Hosting
+on:
+  push:
+    branches:
+      - master
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: 🚚 Get latest code
+      uses: actions/checkout@v2
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ftp.ohayojapan.net
+        username: all@ohayo.vn
+        password: ${{ secrets.FTP_PASSWORD }}
+        server-dir: ./ohayo.tokyo/
